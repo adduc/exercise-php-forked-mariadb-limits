@@ -1,0 +1,9 @@
+services:
+  db:
+    image: mariadb:10.6
+    ports: [ "3306:3306" ]
+    volumes: [ ./data/mariadb:/var/lib/mysql ]
+    mem_limit: 4G
+    environment:
+      MARIADB_ROOT_PASSWORD: &password password
+      MYSQL_PWD: *password
