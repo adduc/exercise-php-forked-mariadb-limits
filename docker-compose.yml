@@ -7,3 +7,27 @@ services:
     environment:
       MARIADB_ROOT_PASSWORD: &password password
       MYSQL_PWD: *password
+
+    command:
+      - '--innodb-file-per-table=0'
+
+      # General performance optimizations
+      - '--innodb_autoinc_lock_mode=2'
+      - '--innodb-flush-neighbors=0'
+      - '--innodb_io_capacity=400'
+      - '--innodb-flush-log-at-trx-commit=0'
+      - '--query-cache-size=0'
+      - '--query-cache-type=0'
+      - '--join-buffer-size=524288'
+      - '--table-open-cache=3000'
+      - '--sort-buffer-size=2097152'
+      - '--tmp-table-size=16777216'
+      - '--max-heap-table-size=16777216'
+      - '--innodb-fill-factor=80'
+
+      # Development environment optimizations
+      # These may cause data to be lost if MariaDB
+      # is unsafely shutdown.
+      - '--innodb-flush-method=O_DIRECT_NO_FSYNC'
+      - '--skip-innodb-doublewrite'
+      - '--sync_frm=0'
